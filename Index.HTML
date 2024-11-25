@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Vehicle Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1E3A8A; /* Navy blue background */
+            color: white;
+            padding: 20px;
+        }
+
+        input, button {
+            font-size: 16px;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        input[type="text"] {
+            width: 300px;
+        }
+
+        button {
+            background-color: yellow;
+            color: black;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ffd700;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Vehicle Tracker Form</h1>
+
+    <form id="vehicleForm">
+        <label for="vehicleNumber">Vehicle Number:</label><br>
+        <input type="text" id="vehicleNumber" name="vehicleNumber"><br>
+
+        <label for="status">Status:</label><br>
+        <input type="text" id="status" name="status"><br>
+
+        <label for="location">Location (Latitude, Longitude):</label><br>
+        <input type="text" id="location" name="location"><br>
+
+        <label for="phoneNumber">Phone Number:</label><br>
+        <input type="text" id="phoneNumber" name="phoneNumber"><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        // The new URL for your Google Apps Script web app
+        const scriptUrl = "https://script.google.com/macros/s/AKfycbxWLHC9S9VKrR7kd16OQTe5p8n7eWlWwdnFbOXGdOBaBoUKGzpn2OeSnQTLfz_yXx6E/exec";
+
+        document.getElementById("vehicleForm").addEventListener("submit", function(event) {
+            event.preventDefault();  // Prevent form from submitting the usual way
+
+            // Collect form data
+            const vehicleNumber = document.getElementById("vehicleNumber").value;
+            const status = document.getElementById("status").value;
+            const location = document.getElementById("location").value;
+            const phoneNumber = document.getElementById("phoneNumber").value;
+
+            // Prepare data to send
+            const formData = {
+                vehicleNumber: vehicleNumber,
+                status: status,
+                location: location,
+                phoneNumber: phoneNumber
+            };
+
+            // Send POST request to Google Apps Script web app
+            fetch(scriptUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Data submitted successfully!");
+                } else {
+                    alert("Error: " + data.error);
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Error connecting to the server. Please try again.");
+            });
+        });
+    </script>
+
+</body>
+</html>
