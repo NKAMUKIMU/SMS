@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Vehicle Tracker</h1>
+    </header>
+
+    <main>
+        <form id="vehicle-form">
+            <label for="vehicle-number">Vehicle Number:</label>
+            <input type="text" id="vehicle-number" name="vehicle-number" required><br>
+
+            <label for="driver-phone">Driver Phone No:</label>
+            <input type="text" id="driver-phone" name="driver-phone" required><br>
+
+            <label for="status">Status:</label>
+            <select id="status" name="status">
+                <option value="loading">Loading</option>
+                <option value="unloading">Unloading</option>
+                <option value="halting">Halting</option>
+                <option value="empty">Empty</option>
+                <option value="repair">Repair</option>
+            </select><br>
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required><br>
+
+            <button type="submit">Submit</button>
+        </form>
+        <div id="response"></div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Vehicle Tracker</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
